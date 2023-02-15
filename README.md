@@ -1,5 +1,7 @@
 # Kedro Auto Catalog
 
+<img src="https://user-images.githubusercontent.com/22648375/219141193-22fdf6c4-a633-4f64-b7ee-01474a0f7dfb.png" width="250" align=right>
+
 A configurable version of the built in `kedro catalog create` cli. Default
 types can be configured in the projects settings.py, to get these types rather
 than `MemoryDataSets`.
