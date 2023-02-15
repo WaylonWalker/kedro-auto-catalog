@@ -1,0 +1,11 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: 3bf76ff
+_src_path: /home/waylon/git/pytool-template
+author_github: waylonwalker
+author_name: Waylon Walker
+description: Automatically create kedro catalog entries with configurable defaults.
+package_name: kedro-auto-catalog
+package_title: Kedro Auto Catalog
+package_title_input: Kedro Auto Catalog
+python_package: kedro_auto_catalog
+

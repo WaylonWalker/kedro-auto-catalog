@@ -1,0 +1,97 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "kedro-auto-catalog"
+description = 'A rich terminal report for coveragepy.'
+readme = "README.md"
+requires-python = ">=3.7"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "Waylon S. Walker", email = "waylon@waylonwalker.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+  "rich",
+  'kedro',
+]
+dynamic = ["version"]
+
+[project.urls]
+Documentation = "https://github.com/waylonwalker/kedro-auto-catalog#readme"
+Issues = "https://github.com/waylonwalker/kedro-auto-catalog/issues"
+Source = "https://github.com/waylonwalker/kedro-auto-catalog"
+Changelog = "https://github.com/waylonwalker/kedro-auto-catalog"
+
+[project.scripts]
+kedro-auto-catalog = "kedro_auto_catalog.cli.app:app"
+
+[tool.hatch.version]
+path = "kedro_auto_catalog/__about__.py"
+
+[tool.hatch.envs.default]
+dependencies = [
+  "ipython",
+  "mypy",
+  "pyflyby",
+  "pytest",
+  "pytest-mock",
+  "pytest-rich",
+  "coverage",
+  "coverage-rich",
+  "ruff",
+  "black",
+]
+[tool.hatch.envs.default.scripts]
+test = "coverage run -m pytest"
+cov = "coverage-rich report"
+lint = "ruff kedro_auto_catalog"
+format = "black kedro_auto_catalog"
+format-check = "black --check kedro_auto_catalog"
+build-docs = "markata build"
+lint-test = [
+ "lint",
+ "format-check",
+ "test",
+]
+test-lint = "lint-test"
+
+[[tool.hatch.envs.test.matrix]]
+python = ["37", "38", "39", "310", "311"]
+
+[tool.coverage.run]
+branch = true
+parallel = true
+omit = [
+  "kedro_auto_catalog/__about__.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
+
+[tool.pytest.ini_options]
+addopts = "-ra -q --rich"
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.coverage_rich]
+fail-under=80
+
+[project.entry-points."kedro.project_commands"]
+steel-toes = "kedro_auto_catalog.cli:auto_catalog"
