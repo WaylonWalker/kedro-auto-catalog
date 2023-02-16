@@ -68,6 +68,41 @@ Options:
   -h, --help           Show this message and exit.
 ```
 
+## Example
+
+Using the
+[kedro-spaceflights](https://github.com/quantumblacklabs/kedro-starter-spaceflights)
+example, running `kedro auto-catalog -p __default__` yields the following
+catalog in `conf/base/catalog/__default__.yml`
+
+```yaml
+X_test:
+  filepath: data/X_test.pq
+  type: pandas.ParquetDataSet
+X_train:
+  filepath: data/X_train.pq
+  type: pandas.ParquetDataSet
+y_test:
+  filepath: data/y_test.parquet
+  type: pandas.ParquetDataSet
+y_train:
+  filepath: data/y_train.parquet
+  type: pandas.ParquetDataSet
+```
+
+## subdirs
+
+If we use the example configuration with `"subdirs": ["raw", "intermediate",
+"primary"]`, it will convert any leading subdir in your dataset name into a
+directory. If we change y_test to `raw_y_test`, it will put `y_test.parquet`
+in the `raw` directory.
+
+```yml
+raw_y_test:
+  filepath: data/raw/y_test.parquet
+  type: pandas.ParquetDataSet
+```
+
 ## License
 
 `kedro-auto-catalog` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
