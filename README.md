@@ -31,6 +31,7 @@ dict.
 AUTO_CATALOG = {
     "directory": "data",
     "subdirs": ["raw", "intermediate", "primary"],
+    "layers": ["raw", "intermediate", "primary"],
     "default_extension": "parquet",
     "default_type": "pandas.ParquetDataSet",
 }
@@ -90,16 +91,17 @@ y_train:
   type: pandas.ParquetDataSet
 ```
 
-## subdirs
+## subdirs and layers
 
 If we use the example configuration with `"subdirs": ["raw", "intermediate",
-"primary"]`, it will convert any leading subdir in your dataset name into a
-directory. If we change y_test to `raw_y_test`, it will put `y_test.parquet`
-in the `raw` directory.
+"primary"]` and `"layers": ["raw", "intermediate", "primary"]`, it will convert
+any leading subdir/layer in your dataset name into a directory. If we change y_test
+to `raw_y_test`, it will put `y_test.parquet` in the `raw` directory, and in the raw layer.
 
 ```yml
 raw_y_test:
   filepath: data/raw/y_test.parquet
+  layer: raw
   type: pandas.ParquetDataSet
 ```
 
