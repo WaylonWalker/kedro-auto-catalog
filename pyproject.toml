@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "kedro-auto-catalog"
-description = 'A rich terminal report for coveragepy.'
+description = 'A configurable replacement for `kedro catalog create`.'
 readme = "README.md"
 requires-python = ">=3.7"
 license = "MIT"
