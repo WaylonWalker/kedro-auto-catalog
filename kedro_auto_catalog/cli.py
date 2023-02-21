@@ -119,22 +119,30 @@ def _add_missing_datasets_to_catalog(missing_ds, catalog_path):
 
     directory = Path(settings.AUTO_CATALOG.get("directory", "data"))
     subdirs = settings.AUTO_CATALOG.get("subdirs", [])
+    layers = settings.AUTO_CATALOG.get("layers", [])
     extension = settings.AUTO_CATALOG.get("default_extension", "parquet")
     _type = settings.AUTO_CATALOG.get("default_type", "pandas.ParquetDataSet")
 
     for ds_name in missing_ds:
         file_path = directory / f"{ds_name}.{extension}"
+        config = {
+            "type": _type,
+            "filepath": str(file_path),
+        }
         for _subdir in subdirs:
             if ds_name.startswith(_subdir):
                 subdir = _subdir
                 file_name = ds_name.replace(_subdir, "").strip("_")
                 file_path = directory / subdir / f"{file_name}.{extension}"
+                config["filepath"] = str(file_path)
                 break
 
-        catalog_config[ds_name] = {
-            "filepath": str(file_path),
-            "type": _type,
-        }
+        for layer in layers:
+            if ds_name.startswith(layer):
+                config["layer"] = layer
+                break
+
+        catalog_config[ds_name] = config
 
     # Create only `catalog` folder under existing environment
     # (all parent folders must exist).
