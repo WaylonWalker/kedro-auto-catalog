@@ -130,7 +130,7 @@ def _add_missing_datasets_to_catalog(missing_ds, catalog_path):
             if ds_name.startswith(_subdir):
                 subdir = _subdir
                 file_name = ds_name.replace(_subdir, "").strip("_")
-                file_path = f'{directory}{subdir}/{file_name}.{extension}'
+                file_path = f"{directory}{subdir}/{file_name}.{extension}"
 
                 config["filepath"] = str(file_path)
                 break
