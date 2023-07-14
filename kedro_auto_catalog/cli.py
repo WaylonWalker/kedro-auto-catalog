@@ -1,8 +1,5 @@
 """A collection of CLI commands for working with Kedro catalog."""
 
-
-from pathlib import Path
-
 import click
 from kedro.framework.cli.utils import KedroCliError, env_option
 from kedro.framework.project import pipelines, settings
