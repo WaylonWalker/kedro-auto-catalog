@@ -117,14 +117,14 @@ def _add_missing_datasets_to_catalog(missing_ds, catalog_path):
     if not hasattr(settings, "AUTO_CATALOG"):
         settings["AUTO_CATALOG"] = {}
 
-    directory = Path(settings.AUTO_CATALOG.get("directory", "data"))
+    directory = settings.AUTO_CATALOG.get("directory", "data")
     subdirs = settings.AUTO_CATALOG.get("subdirs", [])
     layers = settings.AUTO_CATALOG.get("layers", [])
     extension = settings.AUTO_CATALOG.get("default_extension", "parquet")
     _type = settings.AUTO_CATALOG.get("default_type", "pandas.ParquetDataSet")
 
     for ds_name in missing_ds:
-        file_path = directory / f"{ds_name}.{extension}"
+        file_path = f"{directory}/{ds_name}.{extension}"
         config = {
             "type": _type,
             "filepath": str(file_path),
@@ -133,7 +133,8 @@ def _add_missing_datasets_to_catalog(missing_ds, catalog_path):
             if ds_name.startswith(_subdir):
                 subdir = _subdir
                 file_name = ds_name.replace(_subdir, "").strip("_")
-                file_path = directory / subdir / f"{file_name}.{extension}"
+                file_path = f'{directory}{subdir}/{file_name}.{extension}'
+
                 config["filepath"] = str(file_path)
                 break
 
