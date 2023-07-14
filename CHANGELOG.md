@@ -1,4 +1,4 @@
-## 0.1.0
+## 0.2.0
 
 * fix: s3:// directories are now supported
 
